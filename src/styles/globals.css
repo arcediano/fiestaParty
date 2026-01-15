@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  /* Sistema de colores claro */
+  --color-background: #ffffff;
+  --color-foreground: #020817;
+  --color-card: #ffffff;
+  --color-card-foreground: #020817;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #020817;
+  --color-primary: #FF6B8B;    /* Rosa vibrante */
+  --color-primary-foreground: #f8fafc;
+  --color-secondary: #4ECDC4;  /* Turquesa */
+  --color-secondary-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-accent: #45B7D1;     /* Azul profesional */
+  --color-accent-foreground: #0f172a;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-ring: #020817;
+  --color-radius: 0.5rem;
+
+  /* Sistema de elevación */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* Tema oscuro */
+@theme dark {
+  /* Sistema de colores oscuro con buen contraste */
+  --color-background: #0f172a;          /* Azul oscuro profundo */
+  --color-foreground: #f8fafc;          /* Blanco suave */
+  --color-card: #1e293b;                /* Azul oscuro intermedio */
+  --color-card-foreground: #f8fafc;
+  --color-popover: #1e293b;
+  --color-popover-foreground: #f8fafc;
+  --color-primary: #FF6B8B;            /* Rosa vibrante (mismo que claro) */
+  --color-primary-foreground: #f8fafc;
+  --color-secondary: #4ECDC4;          /* Turquesa (mismo que claro) */
+  --color-secondary-foreground: #0f172a;
+  --color-muted: #334155;              /* Gris azulado oscuro */
+  --color-muted-foreground: #94a3b8;   /* Gris azulado claro */
+  --color-accent: #45B7D1;             /* Azul profesional (mismo que claro) */
+  --color-accent-foreground: #0f172a;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #f8fafc;
+  --color-border: #334155;             /* Borde visible en oscuro */
+  --color-input: #334155;
+  --color-ring: #cbd5e1;
+}
+
+/* Aplicar tema por defecto */
+:root {
+  --background: var(--color-background);
+  --foreground: var(--color-foreground);
+}
+
+/* Dark mode class */
+.dark {
+  --background: var(--color-background);
+  --foreground: var(--color-foreground);
+}
+
+/* Estilos base */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Mejoras de contraste para modo oscuro */
+.dark .contrast-card {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+.dark .contrast-input {
+  background-color: #1e293b;
+  border-color: #475569;
+  color: #f8fafc;
+}
+
+.dark .contrast-text {
+  color: #f8fafc;
+}
+
+.dark .contrast-text-muted {
+  color: #94a3b8;
+}
