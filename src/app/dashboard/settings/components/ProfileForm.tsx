@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@/components/ui/buttons/Button'
-import { Input } from '@/components/ui/forms/Input'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/cards/Card'
+import { Button } from '@/components/ui/Button'
+import { Input } from '@/components/ui/Input'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import { User, Mail, Phone, MapPin, Camera, Save } from 'lucide-react'
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/buttons/Button'
+import { Button } from '@/components/ui/Button'
 import { ArrowRight, Sparkles, Star, TrendingUp, Users } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'

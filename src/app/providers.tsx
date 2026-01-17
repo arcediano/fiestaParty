@@ -2,8 +2,8 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { SessionProvider } from 'next-auth/react'
-import { ThemeProvider } from '@/components/providers/theme-provider'
-import { SubscriptionProvider } from '@/components/providers/subscription-provider'
+import { ThemeProvider } from '@/components/providers/Theme-provider'
+import { SubscriptionProvider } from '@/components/providers/Plan-provider'
 import { Toaster } from 'sonner'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ReactNode } from 'react'

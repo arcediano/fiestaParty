@@ -1,101 +1,83 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { strapi } from '@/lib/strapi'
-import { Template } from '@/types'
+import { Template, TemplateCategory, FilterOptions } from '@/types'
+import { templateService } from '@/lib/services/template-service'
 
-export const useTemplates = (filters?: {
-  search?: string
-  category?: string
-  isPremium?: boolean
-  sort?: string
-  page?: number
-  pageSize?: number
-}) => {
+export const useTemplates = (filters?: FilterOptions) => {
   return useQuery({
     queryKey: ['templates', filters],
-    queryFn: async () => {
-      const params: any = {
-        populate: '*',
-        sort: filters?.sort || 'createdAt:desc',
-      }
-
-      if (filters?.search) {
-        params.filters = {
-          $or: [
-            { name: { $containsi: filters.search } },
-            { description: { $containsi: filters.search } },
-            { tags: { $containsi: filters.search } },
-          ]
-        }
-      }
-
-      if (filters?.category) {
-        params.filters = {
-          ...params.filters,
-          category: { $eq: filters.category }
-        }
-      }
-
-      if (filters?.isPremium !== undefined) {
-        params.filters = {
-          ...params.filters,
-          isPremium: { $eq: filters.isPremium }
-        }
-      }
-
-      if (filters?.page && filters?.pageSize) {
-        params.pagination = {
-          page: filters.page,
-          pageSize: filters.pageSize
-        }
-      }
-
-      const response = await strapi.templates.getAll(params)
-      
-      // Transformar datos de Strapi
-      return response.data.map((item: any) => ({
-        id: item.id,
-        name: item.attributes.name,
-        description: item.attributes.description,
-        category: item.attributes.category,
-        isPremium: item.attributes.isPremium,
-        price: item.attributes.price,
-        rating: item.attributes.rating,
-        usageCount: item.attributes.usageCount,
-        htmlContent: item.attributes.htmlContent,
-        cssContent: item.attributes.cssContent,
-        jsContent: item.attributes.jsContent,
-        previewImage: item.attributes.previewImage?.data?.attributes?.url,
-        features: item.attributes.features || [],
-        tags: item.attributes.tags || [],
-        colorScheme: item.attributes.colorScheme || {},
-        isActive: item.attributes.isActive,
-        createdAt: item.attributes.createdAt,
-        updatedAt: item.attributes.updatedAt,
-      })) as Template[]
-    },
+    queryFn: () => templateService.getTemplates(filters),
     staleTime: 5 * 60 * 1000, // 5 minutos
+    gcTime: 10 * 60 * 1000, // 10 minutos
   })
 }
 
 export const useTemplate = (id: string) => {
   return useQuery({
     queryKey: ['template', id],
-    queryFn: () => strapi.templates.getById(id, '*'),
+    queryFn: () => templateService.getTemplateById(id),
     enabled: !!id,
+    staleTime: 10 * 60 * 1000, // 10 minutos
   })
 }
 
-export const useCreateUserTemplate = () => {
+export const useCreateTemplate = () => {
   const queryClient = useQueryClient()
   
   return useMutation({
-    mutationFn: ({ userId, templateId, data }: {
-      userId: string
-      templateId: string
-      data: any
-    }) => strapi.userTemplates.create(userId, templateId, data),
+    mutationFn: (data: Partial<Template>) => templateService.createTemplate(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['user-templates'] })
+      // Invalidar queries relacionadas
+      queryClient.invalidateQueries({ queryKey: ['templates'] })
     },
+  })
+}
+
+export const useUpdateTemplate = () => {
+  const queryClient = useQueryClient()
+  
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Partial<Template> }) =>
+      templateService.updateTemplate(id, data),
+    onSuccess: (_, variables) => {
+      // Invalidar queries específicas
+      queryClient.invalidateQueries({ queryKey: ['templates'] })
+      queryClient.invalidateQueries({ queryKey: ['template', variables.id] })
+    },
+  })
+}
+
+export const useDeleteTemplate = () => {
+  const queryClient = useQueryClient()
+  
+  return useMutation({
+    mutationFn: (id: string) => templateService.deleteTemplate(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['templates'] })
+    },
+  })
+}
+
+export const useTemplatesByCategory = (category: TemplateCategory) => {
+  return useQuery({
+    queryKey: ['templates', 'category', category],
+    queryFn: () => templateService.getTemplatesByCategory(category),
+    staleTime: 10 * 60 * 1000,
+  })
+}
+
+export const usePopularTemplates = (limit?: number) => {
+  return useQuery({
+    queryKey: ['templates', 'popular', limit],
+    queryFn: () => templateService.getPopularTemplates(limit),
+    staleTime: 15 * 60 * 1000, // 15 minutos
+  })
+}
+
+export const useSearchTemplates = (query: string) => {
+  return useQuery({
+    queryKey: ['templates', 'search', query],
+    queryFn: () => templateService.searchTemplates(query),
+    enabled: query.length > 2, // Solo buscar si hay más de 2 caracteres
+    staleTime: 2 * 60 * 1000, // 2 minutos para búsquedas
   })
 }

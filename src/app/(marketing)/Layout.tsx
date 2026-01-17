@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { Button } from '@/components/ui/buttons/Button'
+import { Button } from '@/components/ui/Button'
 
 export const metadata: Metadata = {
   title: 'Invitaciones Digitales - Crea Invitaciones Únicas',

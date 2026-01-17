@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from '@/components/ui/buttons/Button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/cards/Card'
+import { Button } from '@/components/ui/Button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Check, Crown, CreditCard, Download, Receipt, Zap } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
