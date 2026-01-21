@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
-import DashboardHeader from '@/components/layout/ProfessionalHeader'
-import DashboardSidebar from '@/components/layout/ProfessionalSidebar'
-import SubscriptionBanner from '@/components/layout/SubscriptionBanner'
+// import DashboardHeader from '@/components/layout/ProfessionalHeader'
+// import DashboardSidebar from '@/components/layout/ProfessionalSidebar'
+// import SubscriptionBanner from '@/components/layout/SubscriptionBanner'
 import { useSubscription } from '@/components/providers/Plan-provider'
 // Comentar temporalmente para debug
 // import { ThemeDebug } from '@/components/debug/ThemeDebug'
@@ -42,7 +42,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-200">
-      <DashboardHeader 
+      {/* <DashboardHeader 
         user={session.user}
         onMenuClick={() => setSidebarOpen(true)} 
       />
@@ -51,11 +51,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         isOpen={sidebarOpen} 
         onClose={() => setSidebarOpen(false)}
         isPremium={isPremium}
-      />
+      /> */}
       
       <main className="lg:pl-64 pt-16 transition-all duration-200">
         {/* Solo mostrar banner si no es premium */}
-        {!isPremium && <SubscriptionBanner />}
+        {/* {!isPremium && <SubscriptionBanner />} */}
         
         <div className="p-4 md:p-6 lg:p-8">
           {children}

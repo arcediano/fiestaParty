@@ -2,9 +2,9 @@ import { HeroSection } from './sections/HeroSection'
 import { FeaturesSection } from './sections/FeaturesSection'
 import { TemplatesShowcase } from './sections/TemplatesShowcase'
 import { HowItWorks } from './sections/HowItWorks'
-import { Testimonials } from '../../../components/layout/TestimonialsSection'
+import { TestimonialsSection } from '@/components/layout/TestimonialsSection'
 import { PricingSection } from './sections/PricingSection'
-import { CTASection } from '../../../components/layout/CTASection'
+import { CTASection } from '@/components/layout/CTASection'
 
 export default function LandingPage() {
   return (
@@ -13,7 +13,7 @@ export default function LandingPage() {
       <FeaturesSection />
       <TemplatesShowcase />
       <HowItWorks />
-      <Testimonials />
+      <TestimonialsSection />
       <PricingSection />
       <CTASection />
     </main>

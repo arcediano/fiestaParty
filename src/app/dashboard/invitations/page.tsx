@@ -21,8 +21,8 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { InvitationTable } from './components/InvitationTable'
-import { InvitationStats } from './components/InvitationStats'
+// import { InvitationTable } from './components/InvitationTable'
+// import { InvitationStats } from './components/InvitationStats'
 
 export default function InvitationsPage() {
   const router = useRouter()
@@ -66,7 +66,7 @@ export default function InvitationsPage() {
       </div>
 
       {/* Stats */}
-      <InvitationStats />
+      {/* <InvitationStats /> */}
 
       {/* Filters */}
       <Card>
@@ -137,11 +137,11 @@ export default function InvitationsPage() {
       </Card>
 
       {/* Invitations Table */}
-      <InvitationTable 
+      {/* <InvitationTable 
         search={search}
         statusFilter={statusFilter}
         dateRange={dateRange}
-      />
+      /> */}
 
       {/* Quick Tips */}
       <Card>

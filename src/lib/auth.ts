@@ -2,7 +2,6 @@ import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import GitHubProvider from "next-auth/providers/github"
-import { SessionSubscription } from "@/types"
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -25,29 +24,13 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials")
         }
 
-        // Para desarrollo - cuando integres con Strapi, esto vendrá del backend
-        const userSubscription: SessionSubscription = {
-          id: "sub_dev_001",
-          status: 'active',
-          planId: "plan_free",
-          currentPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-          plan: {
-            name: 'free', // Cambia a 'premium' para probar
-            price: 0,
-            features: [
-              'basic_templates',
-              'basic_invitations',
-              'basic_rsvp',
-              'up_to_50_guests'
-            ]
-          }
-        }
+
 
         return {
           id: "1",
           email: credentials.email,
           name: credentials.email.split('@')[0],
-          subscription: userSubscription
+          subscription: null
         }
       }
     })

@@ -61,8 +61,9 @@ export const strapi = {
 
     getCategories: async () => {
       const response = await strapi.fetch('/templates?fields[0]=category')
-      const categories = [...new Set(response.data.map((t: any) => t.attributes.category))]
-      return categories.filter(Boolean)
+      // const categories = [...new Set(response.data.map((t: any) => t.attributes.category))]
+      // return categories.filter(Boolean)
+      return null;
     },
 
     search: async (query: string, filters?: any) => {
